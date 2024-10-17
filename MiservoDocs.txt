@@ -1,0 +1,22 @@
+This document contains all the global changes made for everyone.
+Please pull the latest updates to use these features and improve your code.
+
+============================================
+=============== Sharjeel ===================
+============================================
+
+// Removed react-icons library to reduce bundle size and implemented custom SVG icons for better performance...
+- react-icons
+
+
+
+
+
+
+
+
+
+
+============================================
+================ Fakhir ====================
+============================================

@@ -1,0 +1,9 @@
+.dropdown span {
+    padding: 0 0px 0px 8px;
+}
+
+.dropdown > div {
+    min-width: 160px !important;
+    background-color: #fff;
+    height: 2.5rem !important;
+}

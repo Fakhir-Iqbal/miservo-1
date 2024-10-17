@@ -1,0 +1,29 @@
+@import '@root/colors.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* How font will be import and it would be on tailwind config */
+@font-face {
+  font-family: "Nunito";
+  src: url("/fonts/nunito/Nunito-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: normal;
+}
+
+body{
+  background-image: url("/images/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

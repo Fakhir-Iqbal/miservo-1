@@ -1,0 +1,14 @@
+:root {
+    --primary-color: #4E9F3D;
+    --secondary-color: #252525;
+    --accent-color: #FF5733;
+    --background-color: #F5F5F5;
+    --text-color: #333333;
+    --link-color: #1E90FF;
+    --white-color: #ffffff;
+    --black-color: #000000;
+}
+
+
+/* these colors will be accessible any where in the project just use by a variable even use white or black by variable don't use custom #ffffff */
+/* you can add more color if need but don't remove */
