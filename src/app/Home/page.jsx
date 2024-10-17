@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Navbar,
@@ -177,7 +179,6 @@ export default function Home() {
 
   return (
     <div className="bg-white">
-
       {/* Navbar */}
       <Navbar className="mx-auto px-4 py-2 lg:py-4 shadow-none">
         <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
@@ -222,7 +223,9 @@ export default function Home() {
       {/* Hero Section  */}
       <div className="border border-yellow-800 flex flex-wrap md:flex-nowrap m-4 rounded-lg">
         <div className="flex flex-col lg:basis-3/4 p-8 md:p-12 md:py-20 overflow-hidden">
-          <h1 className="text-4xl sm:text-5xl font-bold ">Confidential Management</h1>
+          <h1 className="text-4xl sm:text-5xl font-bold ">
+            Confidential Management
+          </h1>
           <span className="flex items-center mt-4">
             <Image
               src="/images/home/righticon.png"
@@ -231,9 +234,11 @@ export default function Home() {
               alt="icon"
               className="h-4 hidden md:block"
             />
-            <h1 className="text-4xl sm:text-5xl font-bold md:ml-14">Trusted Security</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold md:ml-14">
+              Trusted Security
+            </h1>
           </span>
-          <div className="flex justify-end mt-5 xl:mr-24" >
+          <div className="flex justify-end mt-5 xl:mr-24">
             <Image
               src="/images/home/roundArrow.png"
               width={100}
@@ -478,7 +483,8 @@ export default function Home() {
                   onClick={() => toggleOpen(index)}
                   className="d-flex-between-y-center gap-4 w-full bg-white text-black capitalize"
                 >
-                  <span className="text-start">{item.heading}</span> <Icon src={plus} className="w-2.5" />
+                  <span className="text-start">{item.heading}</span>{" "}
+                  <Icon src={plus} className="w-2.5" />
                 </Button>
                 <Collapse open={open === index}>
                   <Card className="mx-auto rounded-none">
@@ -579,7 +585,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }
