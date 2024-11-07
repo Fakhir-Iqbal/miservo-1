@@ -1,3 +1,4 @@
+"Use client"
 import React from 'react'
 import { Input } from "@material-tailwind/react";
 
@@ -7,7 +8,10 @@ const CustomTextField = ({
   placeholder = "Type text...",
   classs = "",
   error = "",
-  hideLabel = false
+  hideLabel = false,
+  onChange,
+  value = "",
+  name = ""
 }) => {
   
   return (
@@ -23,6 +27,9 @@ const CustomTextField = ({
           className: "hidden",
         }}
         containerProps={{ className: "min-w-[100px]" }}
+        onChange={onChange}
+        value={value}
+        name={name}
       />
       <div className='text-red-900 text-sm mt-2'>{error}</div>
     </div>
