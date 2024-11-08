@@ -21,7 +21,7 @@ function SignUpFormStep_1({ navigate, handleChange, formData }) {
         if (!formData.lastName) newErrors.lastName = 'Last name is required';
         if (!formData.email) newErrors.email = 'Email is required';
         if (!formData.phone) newErrors.phone = 'Phone number is required';
-        if (!formData.password) newErrors.password = 'Password is required';
+        if (!formData.password || formData.password.length < 6 ) newErrors.password = 'Password is required';
         if (formData.password !== formData.rePassword) newErrors.rePassword = 'Passwords must match';
 
         setErrors(newErrors);

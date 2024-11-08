@@ -20,14 +20,14 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await axios.post(`http://localhost:3000/api/user/reset-password/${id}`, newPassword);
+      const response = await axios.post(`http://localhost:3000/api/user/reset-password/${id}`, {newPassword});
 
       if (response.status === 200) {
         Swal.fire({
           title: "Password Successfully Changed",
           icon: "success"
         });
-        // window.location.href = '/Login';
+        window.location.href = '/Login';
       }
     } catch (error) {
       console.error("Error during password reset", error);
