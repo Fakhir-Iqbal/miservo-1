@@ -20,7 +20,7 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await axios.post(`http://localhost:3000/api/user/reset-password/${id}`, {newPassword});
+      const response = await axios.post(`https://miservo-api.vercel.app/api/user/reset-password/${id}`, {newPassword});
 
       if (response.status === 200) {
         Swal.fire({

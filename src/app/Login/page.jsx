@@ -67,7 +67,7 @@ const LoginFormComponent = () => {
 
         
         try {
-            const response = await axios.post('http://localhost:3000/api/user/login', loginData, {
+            const response = await axios.post('https://miservo-api.vercel.app/api/user/login', loginData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -75,7 +75,7 @@ const LoginFormComponent = () => {
             console.log("Successfully sent data", response.data);
 
             if (response.status === 200) {
-                saveToLocalStorage('loginData', loginData);
+                saveToLocalStorage('loginData', response.data);
             }
             
             Swal.fire({
