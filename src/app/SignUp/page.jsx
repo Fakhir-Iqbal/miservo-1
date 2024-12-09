@@ -351,7 +351,7 @@ const SignUp = () => {
 
     const SubmitData = async () => {
         try {
-            const response = await axios.post('http://localhost:3000/api/user/create', formData, {
+            const response = await axios.post('https://miservo-api.vercel.app/api/user/create', formData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
