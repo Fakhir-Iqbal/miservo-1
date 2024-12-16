@@ -11,7 +11,7 @@ import axios from "axios";
 const Assests = () => {
   const [data, setData] = useState([]); // Initialize as an empty array
   const [activeAssests, setActiveAssests] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState();
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -40,6 +40,8 @@ const Assests = () => {
       } catch (error) {
         setError("No Assests Found");
         setLoading(false);
+
+
       }
     };
 
@@ -154,6 +156,17 @@ const Assests = () => {
                   Img
                 </label>
               </p>
+
+
+
+
+
+
+
+
+
+
+
               <p>
                 <span className="font-bold">First Name:</span>{" "}
                 {activeAssests.beneficiaryDetails?.firstName}
