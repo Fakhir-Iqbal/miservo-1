@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomTextField from "@root/src/components/CustomTextField";
 import Navbar from "@root/src/components/Navbar/page";
 import Link from "next/link";
@@ -8,13 +8,22 @@ import Attachments from "@root/src/components/AddAttachments/page";
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-const beneficiaries = [
-  { id: 1, name: "John Doe" },
-  { id: 2, name: "Jane Smith" },
-  { id: 3, name: "Alice Johnson" },
-];
+// const beneficiaries = [
+//   { id: 1, name: "John Doe" },
+//   { id: 2, name: "Jane Smith" },
+//   { id: 3, name: "Alice Johnson" },
+// ];
 
 const AddAssets = () => {
+
+  const savedData = localStorage.getItem('loginData');
+  let converSaveData = JSON.parse(savedData);
+  let token = converSaveData.data.token;
+  
+
+
+  const [beneficiaries, setBeneficiaries] = useState([])
+
   const [formData, setFormData] = useState({
     title: "",
     beneficiary: "",
@@ -24,13 +33,59 @@ const AddAssets = () => {
     courtInformation: "",
   });
   console.log(formData, "form data ")
+  
+
+
+
+
+
+
+
+  useEffect(() => {
+    const fetchBeneficiaries = async () => {
+      try {
+        const response = await axios.get(
+          "https://miservo-api.vercel.app/api/beneficiary/get",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.status === 200) {
+         setBeneficiaries(response.data.data)
+         console.log(response.data.data, "beneficiaries")
+        }
+      } catch (error) {
+       console.log(error, "error")
+      }
+    };
+
+    fetchBeneficiaries();
+  }, [token]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   const [errors, setErrors] = useState({});
 
-  const savedData = localStorage.getItem('loginData');
-  let converSaveData = JSON.parse(savedData);
-  let token = converSaveData.data.token;
+
 
 
   const handleChange = (event) => {
@@ -156,8 +211,8 @@ const AddAssets = () => {
                   Select a beneficiary
                 </option>
                 {beneficiaries.map((beneficiary) => (
-                  <option key={beneficiary.id} value={beneficiary.name}>
-                    {beneficiary.name}
+                  <option key={beneficiary._id} value={beneficiary._id}>
+                    {beneficiary.firstName}
                   </option>
                 ))}
               </select>
