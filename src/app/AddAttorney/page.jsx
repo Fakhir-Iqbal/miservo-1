@@ -96,9 +96,6 @@ const AddAttorney = () => {
         icon: 'error',
       });
     }
-
-    // If there are no errors, log form data to the console
-    console.log(formData);
   };
 
   return (

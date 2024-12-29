@@ -63,7 +63,6 @@ const LoginFormComponent = () => {
 
     const handleLoginData = async () => {
         if (!validateInputs()) {
-            console.log("gando")
             return; // Prevent the login attempt if validation fails
         }
 
@@ -74,7 +73,6 @@ const LoginFormComponent = () => {
                     'Content-Type': 'application/json',
                 },
             });
-            console.log("Successfully sent data", response.data);
 
             if (response.status === 200) {
                 saveToLocalStorage('loginData', response.data);
@@ -87,7 +85,7 @@ const LoginFormComponent = () => {
             });
             window.location.href = '/Dashboard';
         } catch (error) {
-            console.error("Error during login", error);
+            // console.error("Error during login", error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",

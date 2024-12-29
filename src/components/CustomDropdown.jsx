@@ -1,11 +1,11 @@
 "Use client"
 import React from 'react'
-import "./dropdown.css"
-import { Select, Option } from "@material-tailwind/react";
 import Icon from './Icon';
+import { Select, Option } from "@material-tailwind/react";
 import { arrowDropdown } from "@root/icons"
+import "./dropdown.css"
 
-function CustomDropdown({ label = "dropdown", menuItems = [], hideLabel = false, value = "", onChange = () => { } }) {
+function CustomDropdown({ label = "dropdown", menuItems = [], hideLabel = false, value = "", onChange = () => {} }) {
 
     return (
         <div className='w-full'>

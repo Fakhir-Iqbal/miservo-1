@@ -10,8 +10,6 @@ import CustomTextField from '@components/CustomTextField';
 import guardIcon from "@images/svgs/auth-guard.svg";
 
 const ForgetPassword = () => {
-
-
     const [loginData, setLoginData] = useState({
         email: '',
     });
@@ -33,7 +31,6 @@ const ForgetPassword = () => {
                 // window.location.href = '/Login';
             }
         } catch (error) {
-            console.error("Error during password reset", error);
             if (error.response && error.response.status === 404) {
                 Swal.fire({
                     icon: "error",

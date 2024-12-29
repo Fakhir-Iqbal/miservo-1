@@ -21,8 +21,6 @@ const Beneficiary = () => {
         assetsAssigned: ''
     });
 
-    console.log(formData)
-
     const [errors, setErrors] = useState({});
 
     const savedData = localStorage.getItem('loginData');

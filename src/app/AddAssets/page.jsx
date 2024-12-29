@@ -20,9 +20,8 @@ const AddAssets = () => {
   let converSaveData = JSON.parse(savedData);
   let token = converSaveData.data.token;
   
-
-
   const [beneficiaries, setBeneficiaries] = useState([])
+  const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
     title: "",
@@ -32,15 +31,7 @@ const AddAssets = () => {
     attorney: null,
     courtInformation: "",
   });
-  console.log(formData, "form data ")
   
-
-
-
-
-
-
-
   useEffect(() => {
     const fetchBeneficiaries = async () => {
       try {
@@ -55,38 +46,14 @@ const AddAssets = () => {
         );
         if (response.status === 200) {
          setBeneficiaries(response.data.data)
-         console.log(response.data.data, "beneficiaries")
         }
       } catch (error) {
-       console.log(error, "error")
+      //  console.log(error, "error")
       }
     };
 
     fetchBeneficiaries();
   }, [token]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  const [errors, setErrors] = useState({});
-
-
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -111,7 +78,7 @@ const AddAssets = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the default form submission
+    e.preventDefault(); 
   
     // Reset any previous errors
     let formErrors = {};
@@ -122,8 +89,6 @@ const AddAssets = () => {
         formErrors[field] = `${field.replace(/([A-Z])/g, ' $1').toUpperCase()} is required.`;
       }
     }
-  
-    // Set the error state
     setErrors(formErrors);
   
     // If there are any validation errors, don't submit the form
