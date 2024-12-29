@@ -9,15 +9,15 @@ import BeneficiariesCard from "@root/src/components/Cards/BeneficiariesCard";
 import axios from "axios";
 
 const Assests = () => {
-  const [data, setData] = useState([]); // Initialize as an empty array
-  const [activeAssests, setActiveAssests] = useState([]);
+  const [data, setData] = useState([]);
+  const [activeAssests, setActiveAssests] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const savedData = localStorage.getItem("loginData");
-  let converSaveData = JSON.parse(savedData);
-  let token = converSaveData?.data?.token;
+  const converSaveData = JSON.parse(savedData);
+  const token = converSaveData?.data?.token;
 
   useEffect(() => {
     const fetchAssests = async () => {
@@ -31,17 +31,18 @@ const Assests = () => {
             },
           }
         );
-        if (response.status === 200) {
-          setData(response.data.data);
-          setActiveAssests(response.data.data);
+        if (response.status === 200 && response.data?.data?.length > 0) {
+          const fetchedData = response.data.data;
+          setData(fetchedData);
+          setActiveAssests(fetchedData[0]); // Set the first asset as active
           setLoading(false);
-          console.log(response.data.data);
+        } else {
+          setError("No Assests Found");
+          setLoading(false);
         }
-      } catch (error) {
-        setError("No Assests Found");
+      } catch (err) {
+        setError("Failed to fetch Assests");
         setLoading(false);
-
-
       }
     };
 
@@ -49,12 +50,16 @@ const Assests = () => {
   }, [token]);
 
   const nextAssests = () => {
+    if (data.length === 0) return;
+
     const nextIndex = (currentIndex + 1) % data.length;
     setCurrentIndex(nextIndex);
     setActiveAssests(data[nextIndex]);
   };
 
   const prevAssests = () => {
+    if (data.length === 0) return;
+
     const prevIndex = (currentIndex - 1 + data.length) % data.length;
     setCurrentIndex(prevIndex);
     setActiveAssests(data[prevIndex]);

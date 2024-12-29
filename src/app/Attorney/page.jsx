@@ -33,14 +33,14 @@ const Attorney = () => {
         );
         if (response.status === 200) {
           setData(response.data.data);
-          setActiveAttorney(response.data.data[0]); 
+          setActiveAttorney(response.data.data[0]);
           setLoading(false);
         }
       } catch (error) {
         setError("No Attorney Found");
         setLoading(false);
 
-        
+
       }
     };
 
@@ -146,33 +146,33 @@ const Attorney = () => {
                 <span className="font-bold">Last Name:</span> {activeAttorney.lastName}
               </p>
               <p>
-                <span className="font-bold">Relation:</span> {activeAttorney.relationShip}
-              </p>
-              <p>
                 <span className="font-bold">Phone:</span> {activeAttorney.contactNumber}
               </p>
               <p>
-                <span className="font-bold">Phone#2:</span> {activeAttorney.whatsappNumber}
+                <span className="font-bold">company cell number:</span> {activeAttorney.companyPhoneNumber}
               </p>
               <p>
-                <span className="font-bold">Whatsapp:</span> {activeAttorney.whatsappNumber}
+                <span className="font-bold">WhatsApp:</span> {activeAttorney.whatsappNumber}
+              </p>
+              <p>
+                <span className="font-bold">company name:</span> {activeAttorney.companyName}
               </p>
               <p>
                 <span className="font-bold">Email:</span> {activeAttorney.email}
               </p>
               <p>
-                <span className="font-bold">Another Email:</span>{" "}
-                {activeAttorney.anotherEmail}
+                <span className="font-bold">Office Email:</span>{" "}
+                {activeAttorney.officeEmail}
               </p>
               <p>
-                <span className="font-bold">Address:</span> {activeAttorney.firstAddress}
+                <span className="font-bold">company website:</span> {activeAttorney.companyWebsite}
               </p>
               <p>
-                <span className="font-bold">Address#2:</span> {activeAttorney.secondAddress}
+                <span className="font-bold">office Address(location):</span> {activeAttorney.officeAddress}
               </p>
               <p>
-                <span className="font-bold">Assigned Assets:</span>{" "}
-                {activeAttorney.assetsAssigned}
+                <span className="font-bold">other address:</span>{" "}
+                {activeAttorney.officeLocation}
               </p>
             </div>
           </div>
