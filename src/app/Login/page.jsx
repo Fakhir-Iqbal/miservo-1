@@ -31,8 +31,10 @@ const LoginFormComponent = () => {
 
     //Save Data To LocalStorage
     const saveToLocalStorage = (key, data) => {
-        localStorage.setItem(key, JSON.stringify(data));
-    };
+        const extendedData = { ...data, timestamp: Date.now() }; // Add timestamp
+        localStorage.setItem(key, JSON.stringify(extendedData));
+      };
+      
 
     //Form Validation
     const validateInputs = () => {

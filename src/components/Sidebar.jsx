@@ -51,7 +51,7 @@ export function SidebarWithBurgerMenu() {
       link: '/PrivacyPolicy'
     },
     { title: "Support", icon: <Icon src={support} className="w-5" />,link: '/HelpSupport' },
-    { title: "Log Out", icon: <Icon src={logout} className="w-5" />,link: '#' },
+    { title: "Log Out", icon: <Icon src={logout} className="w-5" />,link: '/LogOut' },
   ];
 
   return (
