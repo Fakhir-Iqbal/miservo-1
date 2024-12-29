@@ -30,7 +30,7 @@ const ResetPassword = () => {
         window.location.href = '/Login';
       }
     } catch (error) {
-      console.error("Error during password reset", error);
+      // console.error("Error during password reset", error);
       if (error.response && error.response.status === 404) {
         Swal.fire({
           icon: "error",

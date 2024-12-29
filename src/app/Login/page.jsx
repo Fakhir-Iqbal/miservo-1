@@ -13,7 +13,7 @@ import axios from 'axios';
 
 const Login = () => {
     return (
-        <section className='grid grid-cols-2 min-h-[100vh] py-[15vh] bg-custom-image'>
+        <section className='grid grid-cols-2 min-h-[100vh] py-[8vh] bg-custom-image'>
             <div className='border-r-2 border-purple-1000 flex justify-center items-center'>
                 <h1 className='text-5xl text-purple-1000 font-extrabold uppercase'>Miservo</h1>
             </div>
@@ -63,7 +63,6 @@ const LoginFormComponent = () => {
 
     const handleLoginData = async () => {
         if (!validateInputs()) {
-            console.log("gando")
             return; // Prevent the login attempt if validation fails
         }
 
@@ -74,7 +73,6 @@ const LoginFormComponent = () => {
                     'Content-Type': 'application/json',
                 },
             });
-            console.log("Successfully sent data", response.data);
 
             if (response.status === 200) {
                 saveToLocalStorage('loginData', response.data);
@@ -87,7 +85,7 @@ const LoginFormComponent = () => {
             });
             window.location.href = '/Dashboard';
         } catch (error) {
-            console.error("Error during login", error);
+            // console.error("Error during login", error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -99,8 +97,8 @@ const LoginFormComponent = () => {
     return (
         <div className='flex flex-col items-center gap-2 min-w-[500px]'>
 
-            <h1 className='text-4xl mb-2 font-extrabold'>Welcome</h1>
-            <h2 className='text-2xl mb-2 font-normal'>Please login to continue</h2>
+            <h1 className='text-4xl font-extrabold'>Welcome</h1>
+            <h2 className='text-xl mb-2 font-normal'>Please login to continue</h2>
 
             <div className='w-full mt-4'>
                 <CustomTextField
@@ -133,21 +131,21 @@ const LoginFormComponent = () => {
                 LOGIN
             </Button>
 
-            <div className='w-full flex items-center my-4 mt-6'>
+            <div className='w-full flex items-center mt-4'>
                 <div className='flex-1 border-b h-2 border-gray-500'></div>
                     <span className='text-gray-600 mx-4'>or Sign Up with</span>
                 <div className='flex-1 border-b h-2 border-gray-500'></div>
             </div>
 
-            <div className='flex gap-2 my-4'>
+            <div className='flex my-2'>
                 <div className='cursor-pointer'>
-                    <Image src={facebookIcon} alt='Facebook' className='h-full w-full' />
+                    <Image src={facebookIcon} alt='Facebook' className='h-12' />
                 </div>
                 <div className='cursor-pointer'>
-                    <Image src={appleIcon} alt='Apple' className='h-full w-full' />
+                    <Image src={appleIcon} alt='Apple' className='h-12' />
                 </div>
                 <div className='cursor-pointer'>
-                    <Image src={googleIcon} alt='Google' className='h-full w-full' />
+                    <Image src={googleIcon} alt='Google' className='h-12' />
                 </div>
             </div>
 

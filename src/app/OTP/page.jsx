@@ -1,14 +1,10 @@
 "use client"
 
 import React, { useState } from 'react';
-
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { Button } from "@material-tailwind/react";
-import CustomTextField from '@components/CustomTextField'
 import guardIcon from "@images/svgs/auth-guard.svg"
-
 
 const Otp = () => {
     return (
@@ -22,7 +18,6 @@ const Otp = () => {
         </section>
     )
 }
-
 
 function LoginFormComponent({ length = 6, onSubmit }) {
     const [otp, setOtp] = useState(Array(length).fill(''));

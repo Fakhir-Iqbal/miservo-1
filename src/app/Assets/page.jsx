@@ -144,8 +144,6 @@ const Assests = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-
               <p className="col-span-3" >
                 <span className="font-bold">Title:</span> {activeAssests.title}
               </p>
@@ -161,17 +159,6 @@ const Assests = () => {
                   Img
                 </label>
               </p>
-
-
-
-
-
-
-
-
-
-
-
               <p>
                 <span className="font-bold">First Name:</span>{" "}
                 {activeAssests.beneficiaryDetails?.firstName}
