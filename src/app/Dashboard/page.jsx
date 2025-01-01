@@ -48,7 +48,7 @@ function CustomChart() {
   );
 }
 
-const TABLE_HEAD = ["S.No", "Title", "Description", "Beneficiary", "Action"];
+const TABLE_HEAD = ["S.No", "Title", "Description", "Beneficiary"];
 
 const TABLE_ROWS = [
   {
@@ -100,58 +100,6 @@ const TABLE_ROWS = [
 
 export function AssetsTable() {
   return (
-    // <Card className="h-full w-full max-h-72 overflow-y-scroll shadow-none">
-    //   <table className="w-full min-w-max table-auto text-left">
-    //     <thead>
-    //       <tr>
-    //         {TABLE_HEAD.map((head) => (
-    //           <th
-    //             key={head}
-    //             className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-    //           >
-    //             <p className="text-sm text-blue-gray-500 font-normal">{head}</p>
-    //           </th>
-    //         ))}
-    //       </tr>
-    //     </thead>
-    //     <tbody>
-    //       {TABLE_ROWS.map(({ name, job, date }, index) => {
-    //         const isLast = index === TABLE_ROWS.length - 1;
-    //         const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
-
-    //         return (
-    //           <tr key={name}>
-    //             <td className={classes}>
-    //               <p className="text-sm text-blue-gray-500 font-normal">
-    //                 {index}
-    //               </p>
-    //             </td>
-
-    //             <td className={classes}>
-    //               <p className="text-sm text-blue-gray-500 font-normal">
-    //                 {name}
-    //               </p>
-    //             </td>
-    //             <td className={classes}>
-    //               <p className="text-sm text-blue-gray-500 font-normal">
-    //                 Lorem Epsum Lorem Epsum Lorem Epsum
-    //                 {job}
-    //               </p>
-    //             </td>
-    //             <td className={classes}>
-    //               <p className="text-sm text-blue-gray-500 font-normal">
-    //                 {name}
-    //               </p>
-    //             </td>
-    //             <td className={classes}>
-    //               <p className="text-sm text-blue-gray-500 font-normal">Edit</p>
-    //             </td>
-    //           </tr>
-    //         );
-    //       })}
-    //     </tbody>
-    //   </table>
-    // </Card>
     <div className="h-full w-full max-h-72 overflow-y-scroll shadow-none">
       <table className="w-full min-w-max table-auto text-left">
         <thead>
@@ -193,9 +141,6 @@ export function AssetsTable() {
                     {date}
                   </p>
                 </td>
-                <td className={classes}>
-                  <p className="text-sm text-blue-gray-500 font-normal">Edit</p>
-                </td>
               </tr>
             );
           })}
@@ -218,6 +163,13 @@ const ViewAllLayout = ({ children, heading }) => {
 };
 
 const Dashboard = () => {
+
+  const savedData = localStorage.getItem("loginData");
+  const converSaveData = JSON.parse(savedData);
+  const token = converSaveData?.data?.token;
+  const userFirstName = converSaveData?.data?.firstName;
+  const userLastName = converSaveData?.data?.lastName;
+
   return (
     <>
       <Navbar />
@@ -225,7 +177,7 @@ const Dashboard = () => {
         <div className="col-span-12 grid grid-cols-7 px-8 py-6 bg-gradient-to-r from-gray-100/100 to-purple-500/20 rounded-xl">
           <div className="col-span-2 d-flex-column-item-center">
             <h3 className="text-sm font-bold capitalize">welcome back</h3>
-            <h1 className="text-xl font-bold uppercase">Benson ronald</h1>
+            <h1 className="text-xl font-bold uppercase">{userFirstName} {userLastName}</h1>
           </div>
           <div className="col-span-3 d-flex-column-item-center">
             <p className="text-xs">
