@@ -15,7 +15,10 @@ const Assests = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const savedData = localStorage.getItem("loginData");
+  const savedData =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("loginData")
+      : false;
   const converSaveData = JSON.parse(savedData);
   const token = converSaveData?.data?.token;
 
@@ -135,25 +138,25 @@ const Assests = () => {
         {activeAssests && (
           <div className="bg-white my-7 p-4 rounded-2xl">
             <div className="flex justify-between py-3">
-              <h2 className="text-3xl font-bold">
-               Personal Property
-              </h2>
+              <h2 className="text-3xl font-bold">Personal Property</h2>
               <Link href="/" className="flex gap-2 py-3">
                 Edit Details <Icon src={pencil} className="w-4" />
               </Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <p className="col-span-3" >
+              <p className="col-span-3">
                 <span className="font-bold">Title:</span> {activeAssests.title}
               </p>
-              <p className="col-span-3" >
-                <span className="font-bold">Beneficiary:</span> {activeAssests.beneficiaryDetails?.firstName}
+              <p className="col-span-3">
+                <span className="font-bold">Beneficiary:</span>{" "}
+                {activeAssests.beneficiaryDetails?.firstName}
               </p>
-              <p className="col-span-3" >
-                <span className="font-bold">Description:</span> {activeAssests.description}
+              <p className="col-span-3">
+                <span className="font-bold">Description:</span>{" "}
+                {activeAssests.description}
               </p>
-              <p className="col-span-3" >
+              <p className="col-span-3">
                 <span className="font-bold">Document/Video/Image:</span> <br />
                 <label className="border-2 border-dashed border-gray-400 w-20 h-24 flex items-center justify-center cursor-pointer">
                   Img
@@ -164,32 +167,40 @@ const Assests = () => {
                 {activeAssests.beneficiaryDetails?.firstName}
               </p>
               <p>
-                <span className="font-bold">Last Name:</span> {activeAssests.beneficiaryDetails?.lastName}
+                <span className="font-bold">Last Name:</span>{" "}
+                {activeAssests.beneficiaryDetails?.lastName}
               </p>
               <p>
-                <span className="font-bold">Relation:</span> {activeAssests.beneficiaryDetails?.relationShip}
+                <span className="font-bold">Relation:</span>{" "}
+                {activeAssests.beneficiaryDetails?.relationShip}
               </p>
               <p>
-                <span className="font-bold">Phone:</span> {activeAssests.beneficiaryDetails?.contactNumber}
+                <span className="font-bold">Phone:</span>{" "}
+                {activeAssests.beneficiaryDetails?.contactNumber}
               </p>
               <p>
-                <span className="font-bold">Phone#2:</span> {activeAssests.beneficiaryDetails?.whatsappNumber}
+                <span className="font-bold">Phone#2:</span>{" "}
+                {activeAssests.beneficiaryDetails?.whatsappNumber}
               </p>
               <p>
-                <span className="font-bold">Whatsapp:</span> {activeAssests.beneficiaryDetails?.whatsappNumber}
+                <span className="font-bold">Whatsapp:</span>{" "}
+                {activeAssests.beneficiaryDetails?.whatsappNumber}
               </p>
               <p>
-                <span className="font-bold">Email:</span> {activeAssests.beneficiaryDetails?.email}
+                <span className="font-bold">Email:</span>{" "}
+                {activeAssests.beneficiaryDetails?.email}
               </p>
               <p>
                 <span className="font-bold">Another Email:</span>{" "}
                 {activeAssests.beneficiaryDetails?.anotherEmail}
               </p>
               <p>
-                <span className="font-bold">Address:</span> {activeAssests.beneficiaryDetails?.firstAddress}
+                <span className="font-bold">Address:</span>{" "}
+                {activeAssests.beneficiaryDetails?.firstAddress}
               </p>
               <p>
-                <span className="font-bold">Address#2:</span> {activeAssests.beneficiaryDetails?.secondAddress}
+                <span className="font-bold">Address#2:</span>{" "}
+                {activeAssests.beneficiaryDetails?.secondAddress}
               </p>
               <p>
                 <span className="font-bold">Assigned Assets:</span>{" "}
@@ -204,4 +215,3 @@ const Assests = () => {
 };
 
 export default Assests;
-

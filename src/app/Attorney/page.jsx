@@ -15,7 +15,10 @@ const Attorney = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const savedData = localStorage.getItem("loginData");
+  const savedData =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("loginData")
+      : false;
   let converSaveData = JSON.parse(savedData);
   let token = converSaveData?.data?.token;
 
@@ -39,8 +42,6 @@ const Attorney = () => {
       } catch (error) {
         setError("No Attorney Found");
         setLoading(false);
-
-
       }
     };
 
@@ -72,7 +73,9 @@ const Attorney = () => {
       <div className="flex justify-center items-center h-screen">
         <div className="text-center">
           <p className="text-2xl font-bold mb-4">{error}</p>
-          <p className="text-gray-500">Please add Attorney to view them here.</p>
+          <p className="text-gray-500">
+            Please add Attorney to view them here.
+          </p>
         </div>
       </div>
     );
@@ -130,7 +133,8 @@ const Attorney = () => {
           <div className="bg-white my-7 p-4 rounded-2xl">
             <div className="flex justify-between py-3">
               <h2 className="text-3xl font-bold">
-                {currentIndex + 1}. {`${activeAttorney.firstName} ${activeAttorney.lastName}`}
+                {currentIndex + 1}.{" "}
+                {`${activeAttorney.firstName} ${activeAttorney.lastName}`}
               </h2>
               <Link href="/" className="flex gap-2 py-3">
                 Edit Details <Icon src={pencil} className="w-4" />
@@ -143,19 +147,24 @@ const Attorney = () => {
                 {activeAttorney.firstName}
               </p>
               <p>
-                <span className="font-bold">Last Name:</span> {activeAttorney.lastName}
+                <span className="font-bold">Last Name:</span>{" "}
+                {activeAttorney.lastName}
               </p>
               <p>
-                <span className="font-bold">Phone:</span> {activeAttorney.contactNumber}
+                <span className="font-bold">Phone:</span>{" "}
+                {activeAttorney.contactNumber}
               </p>
               <p>
-                <span className="font-bold">company cell number:</span> {activeAttorney.companyPhoneNumber}
+                <span className="font-bold">company cell number:</span>{" "}
+                {activeAttorney.companyPhoneNumber}
               </p>
               <p>
-                <span className="font-bold">WhatsApp:</span> {activeAttorney.whatsappNumber}
+                <span className="font-bold">WhatsApp:</span>{" "}
+                {activeAttorney.whatsappNumber}
               </p>
               <p>
-                <span className="font-bold">company name:</span> {activeAttorney.companyName}
+                <span className="font-bold">company name:</span>{" "}
+                {activeAttorney.companyName}
               </p>
               <p>
                 <span className="font-bold">Email:</span> {activeAttorney.email}
@@ -165,10 +174,12 @@ const Attorney = () => {
                 {activeAttorney.officeEmail}
               </p>
               <p>
-                <span className="font-bold">company website:</span> {activeAttorney.companyWebsite}
+                <span className="font-bold">company website:</span>{" "}
+                {activeAttorney.companyWebsite}
               </p>
               <p>
-                <span className="font-bold">office Address(location):</span> {activeAttorney.officeAddress}
+                <span className="font-bold">office Address(location):</span>{" "}
+                {activeAttorney.officeAddress}
               </p>
               <p>
                 <span className="font-bold">other address:</span>{" "}

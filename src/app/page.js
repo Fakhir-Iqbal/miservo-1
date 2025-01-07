@@ -13,7 +13,7 @@ export default function Page() {
     const checkAuth = () => {
       const savedData = localStorage.getItem("loginData");
       if (savedData) {
-        const { token, timestamp } = JSON.parse(savedData);
+        const { timestamp } = JSON.parse(savedData);
         const isExpired = Date.now() - timestamp > 24 * 60 * 60 * 1000; // 24 hours
 
         if (isExpired) {

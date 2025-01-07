@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import CustomTextField from "@components/CustomTextField";
 import Navbar from "@root/src/components/Navbar/page";
-import Swal from 'sweetalert2';
-import axios from 'axios';
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const AddAttorney = () => {
   const [formData, setFormData] = useState({
@@ -22,9 +22,12 @@ const AddAttorney = () => {
 
   const [errors, setErrors] = useState({});
 
-  const savedData = localStorage.getItem('loginData');
+  const savedData =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("loginData")
+      : false;
   let converSaveData = JSON.parse(savedData);
-  let token = converSaveData.data.token;
+  let token = converSaveData?.data?.token;
 
   // Handle changes in form inputs
   const handleChange = (event) => {
@@ -45,7 +48,9 @@ const AddAttorney = () => {
     // Validate all required fields
     for (let field in formData) {
       if (!formData[field]) {
-        formErrors[field] = `${field.replace(/([A-Z])/g, ' $1').toUpperCase()} is required.`;
+        formErrors[field] = `${field
+          .replace(/([A-Z])/g, " $1")
+          .toUpperCase()} is required.`;
       }
     }
 
@@ -59,8 +64,8 @@ const AddAttorney = () => {
         formData,
         {
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -70,30 +75,31 @@ const AddAttorney = () => {
           title: "Attorney Added Successfully",
           // text: "Your password has been reset successfully.",
           icon: "success",
-        })
-          .then((result) => {
-            if (result.isConfirmed) {
-              setFormData({
-                firstName: "",
-                lastName: "",
-                contactNumber: "",
-                companyPhoneNumber: "",
-                whatsappNumber: "",
-                companyName: "",
-                email: "",
-                officeEmail: "",
-                companyWebsite: "",
-                officeLocation: "",
-                officeAddress: "",
-              });
-            }
-          });
+        }).then((result) => {
+          if (result.isConfirmed) {
+            setFormData({
+              firstName: "",
+              lastName: "",
+              contactNumber: "",
+              companyPhoneNumber: "",
+              whatsappNumber: "",
+              companyName: "",
+              email: "",
+              officeEmail: "",
+              companyWebsite: "",
+              officeLocation: "",
+              officeAddress: "",
+            });
+          }
+        });
       }
     } catch (error) {
       Swal.fire({
         title: "Error",
-        text: error.response?.data?.message || 'Something went wrong, please try again.',
-        icon: 'error',
+        text:
+          error.response?.data?.message ||
+          "Something went wrong, please try again.",
+        icon: "error",
       });
     }
   };

@@ -163,8 +163,10 @@ const ViewAllLayout = ({ children, heading }) => {
 };
 
 const Dashboard = () => {
-
-  const savedData = localStorage.getItem("loginData");
+  const savedData =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("loginData")
+      : false;
   const converSaveData = JSON.parse(savedData);
   const token = converSaveData?.data?.token;
   const userFirstName = converSaveData?.data?.firstName;
@@ -177,7 +179,9 @@ const Dashboard = () => {
         <div className="col-span-12 grid grid-cols-7 px-8 py-6 bg-gradient-to-r from-gray-100/100 to-purple-500/20 rounded-xl">
           <div className="col-span-2 d-flex-column-item-center">
             <h3 className="text-sm font-bold capitalize">welcome back</h3>
-            <h1 className="text-xl font-bold uppercase">{userFirstName} {userLastName}</h1>
+            <h1 className="text-xl font-bold uppercase">
+              {userFirstName} {userLastName}
+            </h1>
           </div>
           <div className="col-span-3 d-flex-column-item-center">
             <p className="text-xs">

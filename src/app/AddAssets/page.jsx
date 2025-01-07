@@ -5,8 +5,8 @@ import CustomTextField from "@root/src/components/CustomTextField";
 import Navbar from "@root/src/components/Navbar/page";
 import Link from "next/link";
 import Attachments from "@root/src/components/AddAttachments/page";
-import Swal from 'sweetalert2';
-import axios from 'axios';
+import Swal from "sweetalert2";
+import axios from "axios";
 
 // const beneficiaries = [
 //   { id: 1, name: "John Doe" },
@@ -15,12 +15,14 @@ import axios from 'axios';
 // ];
 
 const AddAssets = () => {
-
-  const savedData = localStorage.getItem('loginData');
+  const savedData =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("loginData")
+      : false;
   let converSaveData = JSON.parse(savedData);
-  let token = converSaveData.data.token;
-  
-  const [beneficiaries, setBeneficiaries] = useState([])
+  let token = converSaveData?.data?.token;
+
+  const [beneficiaries, setBeneficiaries] = useState([]);
   const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
@@ -31,7 +33,7 @@ const AddAssets = () => {
     attorney: null,
     courtInformation: "",
   });
-  
+
   useEffect(() => {
     const fetchBeneficiaries = async () => {
       try {
@@ -45,10 +47,10 @@ const AddAssets = () => {
           }
         );
         if (response.status === 200) {
-         setBeneficiaries(response.data.data)
+          setBeneficiaries(response.data.data);
         }
       } catch (error) {
-      //  console.log(error, "error")
+        //  console.log(error, "error")
       }
     };
 
@@ -78,19 +80,21 @@ const AddAssets = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
-  
+    e.preventDefault();
+
     // Reset any previous errors
     let formErrors = {};
-  
+
     // Validate required fields (excluding documents and attorney)
     for (let field in formData) {
       if (field !== "documents" && field !== "attorney" && !formData[field]) {
-        formErrors[field] = `${field.replace(/([A-Z])/g, ' $1').toUpperCase()} is required.`;
+        formErrors[field] = `${field
+          .replace(/([A-Z])/g, " $1")
+          .toUpperCase()} is required.`;
       }
     }
     setErrors(formErrors);
-  
+
     // If there are any validation errors, don't submit the form
     if (Object.keys(formErrors).length > 0) {
       Swal.fire({
@@ -100,7 +104,7 @@ const AddAssets = () => {
       });
       return;
     }
-  
+
     // If validation is successful, make the API call
     try {
       const response = await axios.post(
@@ -108,12 +112,12 @@ const AddAssets = () => {
         formData,
         {
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
-  
+
       // If API call is successful, show a success message
       if (response.status === 200) {
         Swal.fire({
@@ -137,12 +141,13 @@ const AddAssets = () => {
       // If there's an error in the API call, show an error message
       Swal.fire({
         title: "Error",
-        text: error.response?.data?.message || 'Something went wrong, please try again.',
-        icon: 'error',
+        text:
+          error.response?.data?.message ||
+          "Something went wrong, please try again.",
+        icon: "error",
       });
     }
   };
-  
 
   return (
     <>
@@ -181,7 +186,9 @@ const AddAssets = () => {
                   </option>
                 ))}
               </select>
-              {errors.beneficiary && <div className="text-red-600">{errors.beneficiary}</div>}
+              {errors.beneficiary && (
+                <div className="text-red-600">{errors.beneficiary}</div>
+              )}
             </div>
             <div className="col-span-12">
               <p className="font-bold mb-1">Description:</p>
@@ -192,13 +199,17 @@ const AddAssets = () => {
                 onChange={handleChange}
                 className="h-36 w-full p-3 border-none resize-none focus:outline-none"
               />
-              {errors.description && <div className="text-red-600">{errors.description}</div>}
+              {errors.description && (
+                <div className="text-red-600">{errors.description}</div>
+              )}
             </div>
 
             <div className="col-span-12">
               <p className="font-bold mb-3">Attach Document/Images/Videos:</p>
               <Attachments onChange={handleAttachmentChange} />
-              {errors.documents && <div className="text-red-600">{errors.documents}</div>}
+              {errors.documents && (
+                <div className="text-red-600">{errors.documents}</div>
+              )}
             </div>
             <div className="col-span-6 flex items-center gap-5 py-3">
               <span className="font-bold">Attorney Against this Asset?</span>
@@ -213,7 +224,9 @@ const AddAssets = () => {
                     className="peer hidden"
                   />
                   <span className="w-5 h-5 border-2 border-yellow-700 bg-white rounded-full flex items-center justify-center mr-2 peer-checked:bg-yellow-700">
-                    {formData.attorney === true && <span className="w-3 h-3 bg-white rounded-full" />}
+                    {formData.attorney === true && (
+                      <span className="w-3 h-3 bg-white rounded-full" />
+                    )}
                   </span>
                   Yes
                 </label>
@@ -227,7 +240,9 @@ const AddAssets = () => {
                     className="peer hidden"
                   />
                   <span className="w-5 h-5 border-2 border-yellow-700 bg-yellow-700 rounded-full flex items-center justify-center mr-2 peer-checked:bg-yellow-700">
-                    {formData.attorney === false && <span className="w-3 h-3 bg-white rounded-full" />}
+                    {formData.attorney === false && (
+                      <span className="w-3 h-3 bg-white rounded-full" />
+                    )}
                   </span>
                   No
                 </label>
@@ -236,7 +251,8 @@ const AddAssets = () => {
 
             <div className="col-span-12">
               <p className="font-bold mb-1">
-                Add court information: (where legal documents are filed in case the attorney is unreachable):
+                Add court information: (where legal documents are filed in case
+                the attorney is unreachable):
               </p>
               <textarea
                 name="courtInformation"

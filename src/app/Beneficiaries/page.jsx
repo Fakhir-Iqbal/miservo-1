@@ -15,7 +15,10 @@ const Beneficiary = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const savedData = localStorage.getItem("loginData");
+  const savedData =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("loginData")
+      : false;
   let converSaveData = JSON.parse(savedData);
   let token = converSaveData?.data?.token;
 
@@ -33,14 +36,12 @@ const Beneficiary = () => {
         );
         if (response.status === 200) {
           setData(response.data.data);
-          setActiveBeneficiary(response.data.data[0]); 
+          setActiveBeneficiary(response.data.data[0]);
           setLoading(false);
         }
       } catch (error) {
         setError("No Beneficiaries Found");
         setLoading(false);
-
-        
       }
     };
 
@@ -72,7 +73,9 @@ const Beneficiary = () => {
       <div className="flex justify-center items-center h-screen">
         <div className="text-center">
           <p className="text-2xl font-bold mb-4">{error}</p>
-          <p className="text-gray-500">Please add beneficiaries to view them here.</p>
+          <p className="text-gray-500">
+            Please add beneficiaries to view them here.
+          </p>
         </div>
       </div>
     );
@@ -130,7 +133,8 @@ const Beneficiary = () => {
           <div className="bg-white my-7 p-4 rounded-2xl">
             <div className="flex justify-between py-3">
               <h2 className="text-3xl font-bold">
-                {currentIndex + 1}. {`${activeBeneficiary.firstName} ${activeBeneficiary.lastName}`}
+                {currentIndex + 1}.{" "}
+                {`${activeBeneficiary.firstName} ${activeBeneficiary.lastName}`}
               </h2>
               <Link href="/" className="flex gap-2 py-3">
                 Edit Details <Icon src={pencil} className="w-4" />
@@ -143,32 +147,40 @@ const Beneficiary = () => {
                 {activeBeneficiary.firstName}
               </p>
               <p>
-                <span className="font-bold">Last Name:</span> {activeBeneficiary.lastName}
+                <span className="font-bold">Last Name:</span>{" "}
+                {activeBeneficiary.lastName}
               </p>
               <p>
-                <span className="font-bold">Relation:</span> {activeBeneficiary.relationShip}
+                <span className="font-bold">Relation:</span>{" "}
+                {activeBeneficiary.relationShip}
               </p>
               <p>
-                <span className="font-bold">Phone:</span> {activeBeneficiary.contactNumber}
+                <span className="font-bold">Phone:</span>{" "}
+                {activeBeneficiary.contactNumber}
               </p>
               <p>
-                <span className="font-bold">Phone#2:</span> {activeBeneficiary.whatsappNumber}
+                <span className="font-bold">Phone#2:</span>{" "}
+                {activeBeneficiary.whatsappNumber}
               </p>
               <p>
-                <span className="font-bold">Whatsapp:</span> {activeBeneficiary.whatsappNumber}
+                <span className="font-bold">Whatsapp:</span>{" "}
+                {activeBeneficiary.whatsappNumber}
               </p>
               <p>
-                <span className="font-bold">Email:</span> {activeBeneficiary.email}
+                <span className="font-bold">Email:</span>{" "}
+                {activeBeneficiary.email}
               </p>
               <p>
                 <span className="font-bold">Another Email:</span>{" "}
                 {activeBeneficiary.anotherEmail}
               </p>
               <p>
-                <span className="font-bold">Address:</span> {activeBeneficiary.firstAddress}
+                <span className="font-bold">Address:</span>{" "}
+                {activeBeneficiary.firstAddress}
               </p>
               <p>
-                <span className="font-bold">Address#2:</span> {activeBeneficiary.secondAddress}
+                <span className="font-bold">Address#2:</span>{" "}
+                {activeBeneficiary.secondAddress}
               </p>
               <p>
                 <span className="font-bold">Assigned Assets:</span>{" "}
