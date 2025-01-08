@@ -1,22 +1,37 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Loader from "@root/src/components/Loader";
 
 const LogOut = () => {
   const router = useRouter();
+  const [showLoader, setShowLoader] = useState(false);
 
-  useEffect(() => {
-    localStorage.removeItem("loginData");
+  const handleLogout = () => {
+    setShowLoader(true);
 
-    router.push("/");
-  }, [router]);
+    setTimeout(() => {
+      localStorage.removeItem("loginData");
+      router.push("/");
+    }, 1000); // Optional timeout for better UX with loader
+  };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <p className="text-xl">Logging out...</p> <br />
-      <Loader/>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      {!showLoader ? (
+        <>
+          <p className="text-xl mb-4">Are you sure you want to log out?</p>
+          <p>
+            Click here to <span className="text-red-500 cursor-pointer" onClick={handleLogout} >log out</span>
+          </p>
+        </>
+      ) : (
+        <>
+          <p className="text-xl mb-4">Logging out...</p>
+          <Loader />
+        </>
+      )}
     </div>
   );
 };

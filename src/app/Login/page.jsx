@@ -10,6 +10,7 @@ import facebookIcon from "@images/svgs/facebook-icon.svg";
 import appleIcon from "@images/svgs/apple-icon.svg";
 import { Checkbox, Button } from "@material-tailwind/react";
 import axios from "axios";
+import Loader from "@root/src/components/Loader";
 
 const Login = () => {
   return (
@@ -29,6 +30,7 @@ const Login = () => {
 const LoginFormComponent = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false); 
 
   //Save Data To LocalStorage
   const saveToLocalStorage = (key, data) => {
@@ -55,7 +57,7 @@ const LoginFormComponent = () => {
 
     // Password validation
     if (!loginData.password || loginData.password.length < 6) {
-      newErrors.password = "Password is required";
+      newErrors.password = "Password must be at least 6 characters long";
       valid = false;
     }
 
@@ -68,6 +70,7 @@ const LoginFormComponent = () => {
       return; // Prevent the login attempt if validation fails
     }
 
+    setLoading(true); 
     try {
       const response = await axios.post(
         "https://miservo-api.vercel.app/api/user/login",
@@ -81,21 +84,21 @@ const LoginFormComponent = () => {
 
       if (response.status === 200) {
         saveToLocalStorage("loginData", response.data);
+        Swal.fire({
+          title: "Successfully Logged In!",
+          text: "Thank You",
+          icon: "success",
+        });
+        window.location.href = "/Dashboard";
       }
-
-      Swal.fire({
-        title: "Successfully Logged In!",
-        text: "Thank You",
-        icon: "success",
-      });
-      window.location.href = "/Dashboard";
     } catch (error) {
-      // console.error("Error during login", error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Invalid User or Password!",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -141,12 +144,13 @@ const LoginFormComponent = () => {
         </Link>
       </div>
 
-      <Button
+      {loading ? <Loader/> : <Button
         className="w-full font-inter shadow-none hover:shadow-none text-black bg-yellow-800"
         onClick={handleLoginData}
+        disabled={loading} // Disable button while loading
       >
         LOGIN
-      </Button>
+      </Button> }
 
       <div className="w-full flex items-center mt-4">
         <div className="flex-1 border-b h-2 border-gray-500"></div>

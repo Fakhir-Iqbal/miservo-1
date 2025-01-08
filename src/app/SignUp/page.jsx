@@ -9,6 +9,7 @@ import { Button } from "@material-tailwind/react";
 import { backArrow, bankIcon, debitCard } from "@root/icons.js"
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import Loader from '@root/src/components/Loader';
 
 
 function SignUpFormStep_1({ navigate, handleChange, formData }) {
@@ -131,14 +132,29 @@ function SignUpFormStep_2({ navigate, handleChange, formData }) {
             <div className='d-flex-between-y-center max-w-full gap-4 main'>
                 <CustomDropdown
                     label="City"
-                    menuItems={['USA', "PAK", "IND"]}
+                    menuItems={[
+                        'New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix',
+                        'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose',
+                        'Austin', 'Jacksonville', 'Fort Worth', 'Columbus', 'Indianapolis',
+                        'Charlotte', 'San Francisco', 'Seattle', 'Denver', 'Washington D.C.'
+                    ]}
                     onChange={(value) => handleChange(value, 'city')}
                     value={formData.city || ''}
                     error={errors.city}
                 />
                 <CustomDropdown
                     label="State"
-                    menuItems={['Punjab', "Sindh", "Balochistan"]}
+                    menuItems={[
+                        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
+                        'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
+                        'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+                        'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+                        'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+                        'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+                        'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+                        'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah',
+                        'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+                    ]}
                     onChange={(value) => handleChange(value, 'state')}
                     value={formData.state || ''}
                     error={errors.state}
@@ -173,6 +189,7 @@ function SignUpFormStep_2({ navigate, handleChange, formData }) {
 function SignUpFormStep_3({ navigate, handleChange, formData }) {
 
     const [errors, setErrors] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
 
     const validate = () => {
         const newErrors = {};
@@ -183,9 +200,15 @@ function SignUpFormStep_3({ navigate, handleChange, formData }) {
         return Object.keys(newErrors).length === 0; // true if no errors
     };
 
-    const handleNext = () => {
+    const handleNext = async () => {
         if (validate()) {
-            navigate();
+            setIsLoading(true); 
+            try {
+                await navigate(); 
+                setIsLoading(false); 
+            } catch (err) {
+                setIsLoading(false);
+            }
         }
     };
 
@@ -203,7 +226,9 @@ function SignUpFormStep_3({ navigate, handleChange, formData }) {
                 onChange={(value) => handleChange(value, 'checkInDuration')}
                 value={formData.checkInDuration || ''}
             />
-            <Button className='w-full' onClick={handleNext}>CONTINUE</Button>
+            {isLoading ? <Loader /> :
+                <Button className='w-full' onClick={handleNext}>Continue </Button>
+            }
         </>
     );
 }
