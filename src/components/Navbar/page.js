@@ -47,7 +47,7 @@ export default function Navbar() {
           <span className="px-3">
             <Icon src={notification} className="w-5" />
           </span>
-          <div className="flex gap-2 border border-yellow-800 p-1 px-3 mx-5">
+          <Link href="/LogOut" className="flex gap-2 border border-yellow-800 p-1 px-3 mx-5">
             <Image
               src="/images/avatar.png"
               width={40}
@@ -56,7 +56,7 @@ export default function Navbar() {
               alt="avatar"
             />
             <Icon src={downicon} className="w-4" />
-          </div>
+          </Link>
           <span className="bg-yellow-700 p-3.5 text-black text-xs font-bold">
             <SidebarWithBurgerMenu />
           </span>
