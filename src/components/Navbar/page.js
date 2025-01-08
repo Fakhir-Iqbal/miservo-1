@@ -53,6 +53,7 @@ export default function Navbar() {
               width={40}
               height={40}
               className=""
+              alt="avatar"
             />
             <Icon src={downicon} className="w-4" />
           </div>
